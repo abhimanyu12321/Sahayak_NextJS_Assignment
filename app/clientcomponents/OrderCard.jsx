@@ -13,62 +13,54 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { deleteProduct, updateProduct } from "../actions";
+import {
+  deleteOrder,
+  deleteProduct,
+  updateOrder,
+  updateProduct,
+} from "../actions";
 
-const ProductCard = ({ name, price, quantity, id }) => {
-  const [cname, setCname] = useState(name);
-  const [cprice, setCprice] = useState(price);
-  const [cquantity, setCquantity] = useState(quantity);
+const OrderCard = ({ city, amount, id }) => {
+  const [ccity, setCcity] = useState(city);
+  const [cquantity, setCquantity] = useState(amount);
   async function handleUpdateSubmit(id) {
-    let response = await updateProduct(cname, cprice, cquantity, id);
+    let response = await updateOrder(city, cquantity, id);
     console.log("update server action return value", response);
   }
 
   async function handleDeleteSubmit(id) {
-    let response = await deleteProduct(id);
+    let response = await deleteOrder(id);
     console.log("delete server action return value", response);
   }
 
   return (
     <div className="flex gap-4 border p-4 justify-around items-center">
-      <div>{name}</div>
-      <div>{price}</div>
-      <div>{quantity}</div>
+      <div>{id}</div>
+      <div>{amount}</div>
+      <div>{city}</div>
       <Dialog>
         <DialogTrigger asChild>
           <Button>Update</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit product</DialogTitle>
+            <DialogTitle>Edit Order</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
-                Name
+                City
               </Label>
               <Input
                 id="name"
-                defaultValue={cname}
+                defaultValue={ccity}
                 className="col-span-3"
-                onChange={(e) => setCname(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="price" className="text-right">
-                Price
-              </Label>
-              <Input
-                id="username"
-                defaultValue={cprice}
-                className="col-span-3"
-                type="number"
-                onChange={(e) => setCprice(e.target.value)}
+                onChange={(e) => setCcity(e.target.value)}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
-                Quantity
+                Amount
               </Label>
               <Input
                 id="quantity"
@@ -96,4 +88,4 @@ const ProductCard = ({ name, price, quantity, id }) => {
   );
 };
 
-export default ProductCard;
+export default OrderCard;
