@@ -16,14 +16,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Some screenshots of website
 
-This project use![Screenshot 2024-05-09 212038](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/9a0d3bae-2c6b-488b-a61e-d3996bb02edc)
-s [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom![Screenshot 2024-05-09 212038](https://github.com/abhiman![Screenshot 2024-05-09 211952](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/a2137910-1364-46e3-80b2-9e3831db5c1f)
-yu12321/Sahayak_NextJS_Assignment/assets/122272179/60d3baa7-4af4-456c-a879-07dfc67ccfd9)
- Goog![Screenshot 2024-05-09 212059](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/583ae8e1-0cec-41a0-b565-5590f4875d00)
-le Font.
-![Screenshot 2024-05-09 212049](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/ce958f2f-ace3-4bef-8b2b-c4e120239d60)
+
+![Screenshot 2024-05-10 225216](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/5b4af0c6-9676-4111-b0d5-27bac0e5b006)
+
+![Screenshot 2024-05-10 225231](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/a740c0cb-ccc9-4599-8f41-9d37eac7aa0b)
+![Screenshot 2024-05-10 225245](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/608cb092-742a-43a9-820a-55ffe5d82043)
+![Screenshot 2024-05-10 225257](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/78d1f72d-ca13-4fe1-8519-65ab9735d243)
+![Screenshot 2024-05-10 225310](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/31ab4b56-7270-491b-b9ff-801d0a900beb)
+![Screenshot 2024-05-10 225321](https://github.com/abhimanyu12321/Sahayak_NextJS_Assignment/assets/122272179/dca1ce10-a746-44d8-933c-cf5d7d0a4a39)
 
 ## Learn More
 
