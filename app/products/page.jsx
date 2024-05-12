@@ -8,10 +8,12 @@ import { FilterPrice } from "../clientcomponents/FilterPrice";
 
 async function fetchProducts() {
   try {
-    const response = await axios.get(
+    const response = await fetch(
       "https://fastapi-ecommerce-api.onrender.com/products/all"
     );
-    return response.data.data;
+    const data = await response.json();
+
+    return data.data;
   } catch (error) {
     console.log(error);
   }
