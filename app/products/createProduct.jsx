@@ -13,20 +13,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { createProduct } from "../actions";
+import { Spinner } from "@nextui-org/spinner";
 
 const CreateProduct = () => {
   const [cname, setCname] = useState();
   const [cprice, setCprice] = useState();
   const [cquantity, setCquantity] = useState();
+  const [loading, setLoading] = useState(false);
 
   async function handcreateSubmit(name, price, quantity) {
+    setLoading(true);
     let res = await createProduct(name, price, quantity);
+    setLoading(false);
     console.log("create product server action return value", res);
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Add new product</Button>
+        <Button>
+          {loading ? <Spinner color="white" /> : "Add new product"}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
