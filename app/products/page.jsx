@@ -9,7 +9,12 @@ import { FilterPrice } from "../clientcomponents/FilterPrice";
 async function fetchProducts() {
   try {
     const response = await fetch(
-      "https://fastapi-ecommerce-api.onrender.com/products/all"
+      "https://fastapi-ecommerce-api.onrender.com/products/all",
+      {
+        next: {
+          revalidate: 1,
+        },
+      }
     );
     const data = await response.json();
 
