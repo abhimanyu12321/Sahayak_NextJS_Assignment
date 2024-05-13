@@ -133,8 +133,10 @@ export async function filterProduct(min, max) {
     //     `https://fastapi-ecommerce-api.onrender.com/products/all/?min_price=${min}&max_price=${max}`
     // );
 
-    const res = await fetch(`https://fastapi-ecommerce-api.onrender.com/products/all/?min_price=${min}&max_price=${max}`)
+    const res = await fetch(`https://fastapi-ecommerce-api.onrender.com/products/all?limit=10&offset=0&min_price=${min}&max_price=${max}`, {
+        cache: "no-store"
+    })
     const data = await res.json()
-    revalidatePath('/products/all')
+    // revalidatePath('/products/all')
     return data
 }

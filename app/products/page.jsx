@@ -1,11 +1,9 @@
-import React, { Suspense } from "react";
-import axios from "axios";
+import React from "react";
 import Link from "next/link";
-import ProductCard from "../clientcomponents/ProductCard";
 import CreateProduct from "./createProduct";
 import { Button } from "@/components/ui/button";
-import { FilterPrice } from "../clientcomponents/FilterPrice";
-import { Spinner } from "@nextui-org/spinner";
+
+import ProductList from "./ProductList";
 
 async function fetchProducts() {
   try {
@@ -34,35 +32,7 @@ async function page() {
           <CreateProduct />
         </div>
       </div>
-
-      <div className="productContainer w-[80vw] mx-auto ">
-        <FilterPrice />
-        <div className="flex gap-4 border p-4 justify-around items-center font-extrabold">
-          <div>Name</div>
-          <div className="flex flex-col">
-            <span>Price</span>
-            <span>sort</span>
-          </div>
-          <div>Quantity</div>
-          <div>Update Action</div>
-          <div>Delete Action</div>
-        </div>
-
-        <Suspense fallback={<Spinner color="white" />}>
-          {products &&
-            products.map((product) => {
-              return (
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  quantity={product.quantity}
-                  id={product.id}
-                />
-              );
-            })}
-        </Suspense>
-      </div>
+      <ProductList data={products} />
     </div>
   );
 }

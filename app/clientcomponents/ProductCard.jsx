@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { deleteProduct, updateProduct } from "../actions";
 import { Spinner } from "@nextui-org/spinner";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ name, price, quantity, id }) => {
   const [cname, setCname] = useState(name);
@@ -22,18 +23,19 @@ const ProductCard = ({ name, price, quantity, id }) => {
   const [cquantity, setCquantity] = useState(quantity);
   const [dloading, setDloading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   async function handleUpdateSubmit(id) {
     setLoading(true);
     let response = await updateProduct(cname, cprice, cquantity, id);
     setLoading(false);
-    console.log("update server action return value", response);
+    router.refresh();
   }
 
   async function handleDeleteSubmit(id) {
     setDloading(true);
     let response = await deleteProduct(id);
     setDloading(false);
-    console.log("delete server action return value", response);
+    router.refresh();
   }
 
   return (
