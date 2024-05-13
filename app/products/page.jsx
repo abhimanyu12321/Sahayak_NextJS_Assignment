@@ -1,22 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import axios from "axios";
 import Link from "next/link";
 import ProductCard from "../clientcomponents/ProductCard";
 import CreateProduct from "./createProduct";
 import { Button } from "@/components/ui/button";
 import { FilterPrice } from "../clientcomponents/FilterPrice";
+import { Spinner } from "@nextui-org/spinner";
 
 async function fetchProducts() {
   try {
-    const response = await fetch(
-      "https://fastapi-ecommerce-api.onrender.com/products/all",
-      {
-        next: {
-          revalidate: 1,
-        },
-      }
+    const { data } = await axios.get(
+      "https://fastapi-ecommerce-api.onrender.com/products/all"
     );
-    const data = await response.json();
 
     return data.data;
   } catch (error) {
@@ -50,18 +45,20 @@ async function page() {
           <div>Delete Action</div>
         </div>
 
-        {products &&
-          products.map((product) => {
-            return (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                price={product.price}
-                quantity={product.quantity}
-                id={product.id}
-              />
-            );
-          })}
+        <Suspense fallback={<Spinner color="white" />}>
+          {products &&
+            products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  quantity={product.quantity}
+                  id={product.id}
+                />
+              );
+            })}
+        </Suspense>
       </div>
     </div>
   );

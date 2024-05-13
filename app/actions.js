@@ -27,6 +27,7 @@ export async function deleteProduct(id) {
 }
 
 export async function deleteOrder(id) {
+    console.log("id of product is :->", id)
     const res = await axios.delete(
         `https://fastapi-ecommerce-api.onrender.com/orders/${id}`
     );
