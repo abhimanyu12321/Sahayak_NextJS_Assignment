@@ -1,6 +1,6 @@
 'use server'
 
-// import axios from "axios";
+import axios from "axios";
 import { revalidatePath } from 'next/cache'
 export async function updateProduct(cname, cprice, cquantity, id) {
 
@@ -47,7 +47,7 @@ export async function deleteOrder(id) {
         method: 'DELETE',
     })
     const data = await res.json()
-
+    revalidatePath('/orders/all')
     return data
 }
 
@@ -74,50 +74,40 @@ export async function createProduct(cname, cprice, cquantity) {
 
 export async function createOrder(id, city, quantity) {
 
-    // const res = await axios.post(
-    //     'https://fastapi-ecommerce-api.onrender.com//orders/create',
-    //     {
-    //         items: [{ productId: id, boughtQuantity: quantity }], userAddress: {
-    //             City: city,
-    //             Country: "India",
-    //             ZipCode: "123456"
-    //         }
-    //     }
-    // );
-
-    const res = await fetch('https://fastapi-ecommerce-api.onrender.com//orders/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+    const res = await axios.post(
+        'https://fastapi-ecommerce-api.onrender.com//orders/create',
+        {
             items: [{ productId: id, boughtQuantity: quantity }], userAddress: {
                 City: city,
                 Country: "India",
                 ZipCode: "123456"
             }
-        })
-    })
+        }
+    );
 
-    const data = await res.json()
-    revalidatePath('/orders/all')
-    return data
-}
-
-export async function updateOrder(id, city, quantity) {
-
-    // const res = await axios.post(
-    //     `https://fastapi-ecommerce-api.onrender.com//orders/${id}`,
-    //     {
-    //         items: [{ productId: id, boughtQuantity: quantity }], userAddress: {
+    // const res = await fetch('https://fastapi-ecommerce-api.onrender.com/orders/create', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         items: [
+    //             { productId: id, boughtQuantity: quantity }], userAddress: {
     //             City: city,
     //             Country: "India",
     //             ZipCode: "123456"
     //         }
-    //     }
-    // );
+    //     })
+    // })
 
-    const res = await fetch(`https://fastapi-ecommerce-api.onrender.com//orders/${id}`, {
+    // const data = await res.json()
+    revalidatePath('/orders/all')
+    return res.data
+}
+
+export async function updateOrder(id, city, quantity) {
+
+    const res = await fetch(`https://fastapi-ecommerce-api.onrender.com/orders/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -145,5 +135,6 @@ export async function filterProduct(min, max) {
 
     const res = await fetch(`https://fastapi-ecommerce-api.onrender.com/products/all/?min_price=${min}&max_price=${max}`)
     const data = await res.json()
+    revalidatePath('/products/all')
     return data
 }

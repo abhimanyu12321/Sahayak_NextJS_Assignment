@@ -13,23 +13,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
-import {
-  deleteOrder,
-  deleteProduct,
-  updateOrder,
-  updateProduct,
-} from "../actions";
+import { deleteOrder, updateOrder } from "../actions";
+import { Spinner } from "@nextui-org/spinner";
 
 const OrderCard = ({ city, amount, id }) => {
   const [ccity, setCcity] = useState(city);
   const [cquantity, setCquantity] = useState(amount);
+  const [dloading, setDloading] = useState(false);
+  const [uloading, setUloading] = useState(false);
   async function handleUpdateSubmit(id) {
+    setUloading(true);
     let response = await updateOrder(city, cquantity, id);
+    setUloading(false);
     console.log("update server action return value", response);
   }
 
   async function handleDeleteSubmit(id) {
+    setDloading(true);
     let response = await deleteOrder(id);
+    setDloading(false);
     console.log("delete server action return value", response);
   }
 
@@ -40,7 +42,7 @@ const OrderCard = ({ city, amount, id }) => {
       <div>{city}</div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>Update</Button>
+          <Button>{uloading ? <Spinner color="white" /> : "Update"}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -82,7 +84,7 @@ const OrderCard = ({ city, amount, id }) => {
       </Dialog>
 
       <Button variant="destructive" onClick={() => handleDeleteSubmit(id)}>
-        delete
+        {dloading ? <Spinner color="white" /> : "delete"}
       </Button>
     </div>
   );

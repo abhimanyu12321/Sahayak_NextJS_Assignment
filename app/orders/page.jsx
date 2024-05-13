@@ -7,17 +7,21 @@ import OrderCard from "../clientcomponents/OrderCard";
 
 async function fetchOrders() {
   try {
-    const response = await axios.get(
-      "https://fastapi-ecommerce-api.onrender.com/orders/all"
+    const response = await fetch(
+      "https://fastapi-ecommerce-api.onrender.com/orders/all?limit=10&offset=0",
+      {
+        cache: "no-store",
+      }
     );
-    return response.data;
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.log(error);
   }
 }
 async function Page() {
   const orders = await fetchOrders();
-  // console.log("orders are ", orders);
+  console.log("orders are ", orders);
 
   return (
     <div className="pt-6 pl-6">
