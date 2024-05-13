@@ -9,10 +9,13 @@ import { Spinner } from "@nextui-org/spinner";
 
 async function fetchProducts() {
   try {
-    const { data } = await axios.get(
-      "https://fastapi-ecommerce-api.onrender.com/products/all"
+    const response = await fetch(
+      "https://fastapi-ecommerce-api.onrender.com/products/all",
+      {
+        cache: "no-store",
+      }
     );
-
+    const data = await response.json();
     return data.data;
   } catch (error) {
     console.log(error);
