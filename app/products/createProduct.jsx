@@ -14,18 +14,20 @@ import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { createProduct } from "../actions";
 import { Spinner } from "@nextui-org/spinner";
+import { useRouter } from "next/navigation";
 
 const CreateProduct = () => {
   const [cname, setCname] = useState();
   const [cprice, setCprice] = useState();
   const [cquantity, setCquantity] = useState();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handcreateSubmit(name, price, quantity) {
     setLoading(true);
     let res = await createProduct(name, price, quantity);
     setLoading(false);
-    console.log("create product server action return value", res);
+    router.push("/");
   }
   return (
     <Dialog>

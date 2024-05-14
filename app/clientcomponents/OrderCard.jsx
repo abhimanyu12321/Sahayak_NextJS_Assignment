@@ -15,17 +15,20 @@ import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { deleteOrder, updateOrder } from "../actions";
 import { Spinner } from "@nextui-org/spinner";
+import { useRouter } from "next/router";
 
 const OrderCard = ({ city, amount, id }) => {
   const [ccity, setCcity] = useState(city);
   const [cquantity, setCquantity] = useState(amount);
   const [dloading, setDloading] = useState(false);
   const [uloading, setUloading] = useState(false);
+  const router = useRouter();
   async function handleUpdateSubmit(id) {
     setUloading(true);
     let response = await updateOrder(city, cquantity, id);
     setUloading(false);
     console.log("update server action return value", response);
+    router.push("/");
   }
 
   async function handleDeleteSubmit(id) {
@@ -33,6 +36,7 @@ const OrderCard = ({ city, amount, id }) => {
     let response = await deleteOrder(id);
     setDloading(false);
     console.log("delete server action return value", response);
+    router.push("/");
   }
 
   return (
