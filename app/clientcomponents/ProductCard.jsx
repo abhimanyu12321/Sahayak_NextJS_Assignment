@@ -38,6 +38,8 @@ const ProductCard = ({ name, price, quantity, id }) => {
     router.push("/");
   }
 
+  console.log("id of product is :->", id);
+
   return (
     <div className="flex gap-4 border p-4 justify-around items-center">
       <div>{name}</div>

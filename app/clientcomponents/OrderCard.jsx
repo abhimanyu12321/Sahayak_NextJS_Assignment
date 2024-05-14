@@ -15,20 +15,19 @@ import { Label } from "@/components/ui/label";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { deleteOrder, updateOrder } from "../actions";
 import { Spinner } from "@nextui-org/spinner";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-const OrderCard = ({ city, amount, id }) => {
-  const [ccity, setCcity] = useState(city);
+const OrderCard = ({ city, amount, id, items }) => {
   const [cquantity, setCquantity] = useState(amount);
   const [dloading, setDloading] = useState(false);
   const [uloading, setUloading] = useState(false);
   const router = useRouter();
   async function handleUpdateSubmit(id) {
     setUloading(true);
-    let response = await updateOrder(city, cquantity, id);
+    let response = await updateOrder(city, cquantity, id, items[0].productId);
     setUloading(false);
     console.log("update server action return value", response);
-    router.push("/");
+    alert(response.detail);
   }
 
   async function handleDeleteSubmit(id) {
@@ -53,17 +52,6 @@ const OrderCard = ({ city, amount, id }) => {
             <DialogTitle>Edit Order</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                City
-              </Label>
-              <Input
-                id="name"
-                defaultValue={ccity}
-                className="col-span-3"
-                onChange={(e) => setCcity(e.target.value)}
-              />
-            </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Amount

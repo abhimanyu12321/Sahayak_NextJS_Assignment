@@ -75,9 +75,16 @@ export async function createProduct(cname, cprice, cquantity) {
 export async function createOrder(id, city, quantity) {
 
     const res = await axios.post(
-        'https://fastapi-ecommerce-api.onrender.com//orders/create',
+        'https://fastapi-ecommerce-api.onrender.com/orders/create',
         {
-            items: [{ productId: id, boughtQuantity: quantity }], userAddress: {
+            items:
+                [
+                    {
+                        productId: id,
+                        boughtQuantity: quantity
+                    }
+                ],
+            userAddress: {
                 City: city,
                 Country: "India",
                 ZipCode: "123456"
@@ -105,7 +112,9 @@ export async function createOrder(id, city, quantity) {
     return res.data
 }
 
-export async function updateOrder(id, city, quantity) {
+export async function updateOrder(city, quantity, id, pid) {
+
+    console.log("update product values are :->", city, quantity, id, pid)
 
     const res = await fetch(`https://fastapi-ecommerce-api.onrender.com/orders/${id}`, {
         method: 'PUT',
@@ -113,7 +122,9 @@ export async function updateOrder(id, city, quantity) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            items: [{ productId: id, boughtQuantity: quantity }], userAddress: {
+            items: [
+                { productId: pid, boughtQuantity: quantity }
+            ], userAddress: {
                 City: city,
                 Country: "India",
                 ZipCode: "123456"

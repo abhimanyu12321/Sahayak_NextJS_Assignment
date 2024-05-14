@@ -21,7 +21,7 @@ async function fetchOrders() {
 }
 async function Page() {
   const orders = await fetchOrders();
-  console.log("orders are ", orders);
+  // console.log("orders are ", orders);
 
   return (
     <div className="pt-6 pl-6">
@@ -51,6 +51,7 @@ async function Page() {
                 id={order.orderId}
                 city={order.userAddress.City}
                 amount={order.totalAmount}
+                items={order.items}
               />
             );
           })}
