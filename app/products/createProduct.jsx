@@ -27,7 +27,7 @@ const CreateProduct = () => {
     setLoading(true);
     let res = await createProduct(name, price, quantity);
     setLoading(false);
-    router.push("/");
+    // router.push("/");
   }
   return (
     <Dialog>

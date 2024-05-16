@@ -3,7 +3,9 @@ import Link from "next/link";
 import CreateProduct from "./createProduct";
 import { Button } from "@/components/ui/button";
 
-import ProductList from "./ProductList";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import ProductCard from "../clientcomponents/ProductCard";
+import FiltetPrice from "./FiltetPrice";
 
 async function fetchProducts() {
   try {
@@ -21,6 +23,7 @@ async function fetchProducts() {
 }
 async function page() {
   const products = await fetchProducts();
+
   return (
     <div className="pt-6 pl-6">
       <Button asChild variant="outline" className="text-2xl p-6 m-6">
@@ -32,7 +35,36 @@ async function page() {
           <CreateProduct />
         </div>
       </div>
-      <ProductList data={products} />
+      <div className="productContainer w-[80vw] mx-auto ">
+        {/* Filter Price */}
+
+        <FiltetPrice />
+        <div className="flex gap-4 border p-4 justify-around items-center font-extrabold">
+          <div>Name</div>
+          <div className="flex justify-center items-center gap-2">
+            <span>Price</span>
+            <span>
+              <CaretSortIcon className="text-2xl cursor-pointer font-extrabold" />
+            </span>
+          </div>
+          <div>Quantity</div>
+          <div>Update Action</div>
+          <div>Delete Action</div>
+        </div>
+
+        {products &&
+          products.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                quantity={product.quantity}
+                id={product.id}
+              />
+            );
+          })}
+      </div>
     </div>
   );
 }
