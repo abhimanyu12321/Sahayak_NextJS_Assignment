@@ -7,22 +7,38 @@ import { CaretSortIcon } from "@radix-ui/react-icons";
 import ProductCard from "../clientcomponents/ProductCard";
 import FiltetPrice from "./FiltetPrice";
 
-async function fetchProducts() {
+async function fetchProducts(min, max) {
   try {
-    const response = await fetch(
-      "https://fastapi-ecommerce-api.onrender.com/products/all",
-      {
-        cache: "no-store",
-      }
-    );
-    const data = await response.json();
-    return data.data;
+    if (min && max) {
+      const response = await fetch(
+        `https://fastapi-ecommerce-api.onrender.com/products/all/?min_price=${min}&max_price=${max}`,
+        {
+          cache: "no-store",
+        }
+      );
+      const data = await response.json();
+      return data.data;
+    } else {
+      const response = await fetch(
+        "https://fastapi-ecommerce-api.onrender.com/products/all",
+        {
+          cache: "no-store",
+        }
+      );
+      const data = await response.json();
+      return data.data;
+    }
   } catch (error) {
     console.log(error);
   }
 }
-async function page() {
-  const products = await fetchProducts();
+async function page({ searchParams }) {
+  const query = searchParams.query;
+  console.log(searchParams.maxPrice, searchParams.minPrice);
+  const products = await fetchProducts(
+    searchParams.minPrice,
+    searchParams.maxPrice
+  );
 
   return (
     <div className="pt-6 pl-6">

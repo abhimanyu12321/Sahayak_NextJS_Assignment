@@ -27,19 +27,6 @@ export async function createProduct(cname, cprice, cquantity) {
     return data
 }
 
-export async function filterProduct(min, max) {
-    const { data } = await axios.get(`https://fastapi-ecommerce-api.onrender.com/products/all/?min_price=${min}&max_price=${max}`);
-    revalidatePath('/products/all')
-    return data
-}
-
-
-
-
-
-
-
-
 // Order Actions
 
 export async function createOrder(id, city, quantity) {
