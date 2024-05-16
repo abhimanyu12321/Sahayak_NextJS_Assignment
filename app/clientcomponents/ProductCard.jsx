@@ -28,14 +28,12 @@ const ProductCard = ({ name, price, quantity, id }) => {
     setLoading(true);
     let response = await updateProduct(cname, cprice, cquantity, id);
     setLoading(false);
-    router.push("/");
   }
 
   async function handleDeleteSubmit(id) {
     setDloading(true);
     let response = await deleteProduct(id);
     setDloading(false);
-    router.push("/");
   }
 
   console.log("id of product is :->", id);
